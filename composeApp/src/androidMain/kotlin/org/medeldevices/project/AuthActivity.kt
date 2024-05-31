@@ -9,19 +9,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.navigator.Navigator
+import features.auth.presentaion.screens.login.AuthScreen
 import features.auth.presentaion.screens.login.LoginScreen
 
 class AuthActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AuthScreen()
+            AndroidAuthScreen()
         }
     }
 }
 
 @Composable
-fun AuthScreen() {
+fun AndroidAuthScreen() {
     val context = LocalContext.current
     val isLoggedIn = checkIfLoggedIn()
 
@@ -34,14 +35,15 @@ fun AuthScreen() {
         }
     }
 
-    if (!isLoggedIn) {
-        MaterialTheme {
-            Navigator(screen = LoginScreen())
+    AuthScreen(isLoggedIn = isLoggedIn) {
+        Intent(context, MainActivity::class.java).also {
+            context.startActivity(it)
         }
+        (context as ComponentActivity).finish()
     }
 }
 
 private fun checkIfLoggedIn(): Boolean {
-    // Implementirajte stvarnu logiku za proveru prijave korisnika
+    // Implement your actual logic to check if the user is logged in
     return false
 }

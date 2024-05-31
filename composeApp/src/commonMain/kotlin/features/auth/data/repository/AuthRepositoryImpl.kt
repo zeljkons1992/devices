@@ -11,7 +11,7 @@ class AuthRepositoryImpl(private val apiClient: ApiService): AuthRepository {
 
 
 
-    override suspend fun userLogin(user: User): JwtTokenEntiy {
+    override suspend fun userRegister(user: User): JwtTokenEntiy {
         val response: JwtToken = apiClient.userLogin(user)
         return  response.toEntity();
     }

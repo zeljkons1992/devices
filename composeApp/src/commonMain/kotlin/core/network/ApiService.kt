@@ -17,7 +17,7 @@ import org.koin.core.component.inject
 object ApiService: KoinComponent{
     private val client: HttpClient by inject()
 
-    suspend fun userLogin(user: User) : JwtToken{
+    suspend fun userRegister(user: User) : JwtToken{
         val response = client.post("/api/register"){
             contentType(ContentType.Application.Json)
             setBody(user)
