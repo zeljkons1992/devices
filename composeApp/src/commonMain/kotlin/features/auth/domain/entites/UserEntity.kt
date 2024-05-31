@@ -5,3 +5,8 @@ data class UserEntity(
     val email :String,
     val password: String
 )
+
+data class UserLoginEntity(
+    val email: String,
+    val password: String
+)
