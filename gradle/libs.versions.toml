@@ -20,6 +20,8 @@ kamel-version = "0.9.0"
 appcompat = "1.7.0"
 activityKtx = "1.7.1"
 
+lifecycleViewModel = "2.8.1"
+
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
@@ -45,6 +47,8 @@ ktor-client-serialization = {module="io.ktor:ktor-client-serialization",version.
 ktor-client-content-negotiation = {module = "io.ktor:ktor-client-content-negotiation", version.ref= "ktor"}
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 kamel = {module ="media.kamel:kamel-image", version.ref = "kamel-version"}
+
+lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewModel"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
