@@ -98,8 +98,6 @@ android {
         debugImplementation(compose.uiTooling)
     }
 }
-dependencies {
-    implementation(project(":composeApp"))
-}
+
 
 
