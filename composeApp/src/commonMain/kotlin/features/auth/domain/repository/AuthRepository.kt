@@ -6,4 +6,5 @@ import features.auth.domain.entites.JwtTokenEntiy
 
 interface AuthRepository {
     suspend fun userRegister(user: User): JwtTokenEntiy
+    suspend fun userLogin(user: User): JwtTokenEntiy
 }

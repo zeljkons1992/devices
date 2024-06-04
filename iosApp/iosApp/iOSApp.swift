@@ -1,10 +1,20 @@
-import SwiftUI
+// iosMain/AppDelegate.swift
+import Foundation
+import shared
+
+func startKoin() {
+    KoinKt.doInitKoin()
+}
 
 @main
 struct iOSApp: App {
-	var body: some Scene {
-		WindowGroup {
-			ContentView()
-		}
-	}
+    init() {
+        startKoin()
+    }
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
 }

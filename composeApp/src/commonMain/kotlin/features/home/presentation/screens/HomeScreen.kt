@@ -9,21 +9,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import core.utils.datastore.DataStoreRepository
+import org.koin.compose.koinInject
 
-class HomeScreen : Screen{
+class HomeScreen : Screen {
 
     @Composable
-    override fun Content() {
+    override fun Content( ) {
         val navigator = LocalNavigator.current
+        val dataStoreRepository: DataStoreRepository= koinInject()
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
-        ){
+        ) {
             Button(onClick = {
+                val jwt =dataStoreRepository.getString("jwtToken")
+                println("JWT TOKEN :$jwt")
                 navigator?.push(HomeScreenDetails(number = 10))
-            }){
+            }) {
                 Text("GO")
             }
         }
     }
 }
+

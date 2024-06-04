@@ -36,6 +36,8 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.android)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
 
         }
         commonMain.dependencies {
@@ -51,7 +53,8 @@ kotlin {
             implementation(libs.navigator)
             implementation(libs.navigator.tabs)
             implementation(libs.navigator.transitions)
-            implementation(libs.koin.core)
+            api(libs.koin.core)
+            implementation(libs.koin.compose)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.cio)
             implementation(libs.ktor.serialization)
@@ -59,6 +62,10 @@ kotlin {
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.client.serialization)
             implementation(libs.kamel)
+            implementation(libs.russh.wolf)
+            implementation(libs.data.store)
+            implementation("network.chaintech:cmp-preference:1.0.0")
+
 
         }
     }
@@ -100,6 +107,7 @@ android {
         debugImplementation(compose.uiTooling)
     }
 }
+
 
 
 
