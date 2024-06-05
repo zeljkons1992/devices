@@ -10,9 +10,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.navigator.Navigator
 import com.example.cmppreference.AppContext
+import core.navigation.MainScreen
 import core.utils.datastore.DataStoreViewModel
 import features.auth.presentaion.screens.login.LoginScreen
-import features.home.presentation.screens.HomeScreen
 import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
@@ -36,8 +36,9 @@ fun CheckIsUserLogged(viewModel: DataStoreViewModel = koinViewModel()) {
     }
 
     if (isUserLoggedIn) {
-        Navigator(HomeScreen())
+        MainScreen()
     } else {
         Navigator(LoginScreen())
     }
 }
+

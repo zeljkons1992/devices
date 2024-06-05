@@ -34,7 +34,7 @@ actual val repositoryModule = module {
 
 actual val apiModule = module {
     single { provideHttpClient() }
-    single { ApiService(get(),"https://8edc-82-117-207-248.ngrok-free.app") }
+    single { ApiService(get(),"https://edc5-82-117-207-248.ngrok-free.app") }
 }
 actual val dataStoreModule = module {
     single<Settings> {

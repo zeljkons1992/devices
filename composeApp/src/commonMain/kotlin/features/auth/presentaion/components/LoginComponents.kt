@@ -27,23 +27,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModelStore
 import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.Navigator
-import core.utils.datastore.DataStoreRepository
+import cafe.adriel.voyager.navigator.currentOrThrow
+import core.navigation.MainScreen
 import features.auth.data.models.User
+import features.auth.presentaion.screens.login.LoginScreen
 import features.auth.presentaion.screens.registration.RegistrationScreen
 import features.auth.presentation.mvi.viewmodel.AuthEvent
 import features.auth.presentation.mvi.viewmodel.AuthSideEffect
 import features.auth.presentation.mvi.viewmodel.AuthState
 import features.auth.presentation.mvi.viewmodel.AuthViewModel
-import features.home.presentation.screens.HomeScreen
+import features.home.presentation.screens.HomeTab
 import org.koin.compose.koinInject
 
 @Composable
 fun LoginContent(viewModel: AuthViewModel = koinInject()) {
 
-    val navigator = LocalNavigator.current
+    val navigator = LocalNavigator.currentOrThrow
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val state by viewModel.uiState.collectAsState()
@@ -51,11 +51,19 @@ fun LoginContent(viewModel: AuthViewModel = koinInject()) {
     val sideEffect by viewModel.sideEffect.collectAsState(initial = null)
 
 
+    var currentScreen by remember { mutableStateOf<Screen>(Screen.Auth) }
+
     LaunchedEffect(sideEffect) {
         if (sideEffect == AuthSideEffect.NavigateToAnotherScreen) {
-            navigator?.replace(HomeScreen())
+            navigator.push(MainScreen())
         }
     }
+
+    when (currentScreen) {
+        Screen.Auth -> LoginScreen() // Your authentication screen
+        Screen.Main -> MainScreen()
+    }
+
 
     Scaffold(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -90,8 +98,12 @@ fun LoginContent(viewModel: AuthViewModel = koinInject()) {
                 Text("Login")
             }
             Spacer(modifier = Modifier.height(16.dp))
-            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
-            Text("Don't have an account? ")
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text("Don't have an account? ")
                 ClickableText(
                     text = AnnotatedString("Register"),
                     onClick = {
@@ -114,4 +126,9 @@ fun LoginContent(viewModel: AuthViewModel = koinInject()) {
     }
 
 
+}
+
+sealed class Screen {
+    data object Auth : Screen()
+    data object Main : Screen()
 }
