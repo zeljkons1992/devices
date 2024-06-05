@@ -1,9 +1,6 @@
 package org.medeldevices.project
 
 import android.app.Application
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import com.example.cmppreference.AppContext
 import com.example.cmppreference.LocalPreference
 import com.russhwolf.settings.Settings
 import getSharedModules

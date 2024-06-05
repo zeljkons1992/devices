@@ -13,5 +13,4 @@ fun getSharedModules(): List<Module> = listOf(
     useCaseModule,
     viewModelModule,
     dataStoreModule
-
 )
