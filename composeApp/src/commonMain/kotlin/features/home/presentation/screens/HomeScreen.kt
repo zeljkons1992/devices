@@ -45,6 +45,7 @@ class HomeScreen : Screen {
         val state by viewModel.uiState.collectAsState()
         val scope = rememberCoroutineScope()
         var showDialog by remember { mutableStateOf(false) }
+        val snackbarHostState = remember { SnackbarHostState() }
 
         LaunchedEffect(Unit) {
             scope.launch {
@@ -57,7 +58,7 @@ class HomeScreen : Screen {
                             showDialog = false
                         }
                         is HomeSideEffect.ShowMessage -> {
-                            // Show message logic here (e.g., Snackbar)
+                            snackbarHostState.showSnackbar(sideEffect.message)
                         }
                     }
                 }
@@ -103,6 +104,11 @@ class HomeScreen : Screen {
                 }
                 else -> { /* No additional UI for other states */ }
             }
+
+            SnackbarHost(
+                hostState = snackbarHostState,
+                modifier = Modifier.align(Alignment.BottomCenter)
+            )
         }
 
         if (showDialog) {
