@@ -2,7 +2,7 @@ package features.home.data.repository
 
 import core.network.ApiService
 import features.home.data.models.toDataModel
-import features.home.domain.entities.DeviceEntity
+import features.home.domain.entities.Device
 import features.home.domain.repository.DeviceRepository
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 
 class DeviceRepositoryImpl(private val apiClient: ApiService) :
     DeviceRepository {
-    override suspend fun addDevice(device: DeviceEntity) {
+    override suspend fun addDevice(device: Device) {
         val response: HttpResponse = apiClient.addDevice(device.toDataModel())
         println("evoooooo")
         println(response.status)

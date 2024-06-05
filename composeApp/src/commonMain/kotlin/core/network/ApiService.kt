@@ -1,7 +1,7 @@
 package core.network
 
 import features.auth.data.models.User
-import features.home.data.models.DeviceModel
+import features.home.data.models.DeviceDTO
 import io.ktor.client.HttpClient
 import io.ktor.client.request.header
 import io.ktor.client.request.post
@@ -10,7 +10,7 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 
-class ApiService(private val client: HttpClient, private val baseUrl: String,private val header: String?) {
+class ApiService(private val client: HttpClient, private val baseUrl: String) {
 
     suspend fun userRegister(user: User): HttpResponse {
         return client.post("$baseUrl/api/register") {
@@ -26,9 +26,8 @@ class ApiService(private val client: HttpClient, private val baseUrl: String,pri
         }
     }
 
-    suspend fun addDevice(device: DeviceModel): HttpResponse {
+    suspend fun addDevice(device: DeviceDTO): HttpResponse {
         return client.post("$baseUrl/api/devices") {
-            header("x-auth-token", header)
             contentType(ContentType.Application.Json)
             setBody(device)
         }

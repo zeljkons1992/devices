@@ -1,10 +1,10 @@
 package features.home.data.models
 
-import features.home.domain.entities.DeviceEntity
+import features.home.domain.entities.Device
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class DeviceModel(
+data class DeviceDTO(
     val id: String,
     val name: String,
     val status: String,
@@ -13,8 +13,8 @@ data class DeviceModel(
     val inventoryNumber: String,
     val image: String?
 ) {
-    fun toDeviceEntity(): DeviceEntity {
-        return DeviceEntity(
+    fun toDeviceEntity(): Device {
+        return Device(
             id = id,
             name = name,
             status = status,
@@ -26,8 +26,8 @@ data class DeviceModel(
     }
 
     companion object {
-        fun fromDeviceEntity(deviceEntity: DeviceEntity): DeviceModel {
-            return DeviceModel(
+        fun fromDeviceEntity(deviceEntity: Device): DeviceDTO {
+            return DeviceDTO(
                 id = deviceEntity.id,
                 name = deviceEntity.name,
                 status = deviceEntity.status,
@@ -40,10 +40,10 @@ data class DeviceModel(
     }
 }
 
-fun DeviceModel.toDomain(): DeviceEntity {
+fun DeviceDTO.toDomain(): Device {
     return this.toDeviceEntity()
 }
 
-fun DeviceEntity.toDataModel(): DeviceModel {
-    return DeviceModel.fromDeviceEntity(this)
+fun Device.toDataModel(): DeviceDTO {
+    return DeviceDTO.fromDeviceEntity(this)
 }

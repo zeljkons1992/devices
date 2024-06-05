@@ -7,10 +7,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import features.home.domain.entities.DeviceEntity
+import features.home.domain.entities.Device
 
 @Composable
-fun AddDeviceDialog(onDismiss: () -> Unit, onSubmit: (DeviceEntity) -> Unit) {
+fun AddDeviceDialog(onDismiss: () -> Unit, onSubmit: (Device) -> Unit) {
     var name by remember { mutableStateOf("") }
     var status by remember { mutableStateOf("") }
     var category by remember { mutableStateOf("") }
@@ -24,7 +24,7 @@ fun AddDeviceDialog(onDismiss: () -> Unit, onSubmit: (DeviceEntity) -> Unit) {
             Column(
                 modifier = Modifier.padding(16.dp)
             ) {
-                Text("Add New features.home.domain.entities.Device", style = MaterialTheme.typography.h6)
+                Text("Add New Device", style = MaterialTheme.typography.h6)
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
                     value = name,
@@ -75,7 +75,7 @@ fun AddDeviceDialog(onDismiss: () -> Unit, onSubmit: (DeviceEntity) -> Unit) {
                     Button(onClick = {
                         if (name.isNotEmpty() && status.isNotEmpty() && category.isNotEmpty() && inventoryNumber.isNotEmpty()) {
                             onSubmit(
-                                DeviceEntity(
+                                Device(
                                     id = "",
                                     name = name,
                                     status = status,

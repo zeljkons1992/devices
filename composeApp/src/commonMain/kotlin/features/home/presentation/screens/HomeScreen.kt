@@ -91,7 +91,7 @@ class HomeScreen : Screen {
                     .align(Alignment.BottomEnd)
                     .padding(16.dp)
             ) {
-                Icon(Icons.Default.Add, contentDescription = "Add features.home.domain.entities.Device")
+                Icon(Icons.Default.Add, contentDescription = "Add Device")
             }
 
             when (state) {

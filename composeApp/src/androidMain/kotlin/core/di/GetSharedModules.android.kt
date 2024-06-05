@@ -39,8 +39,9 @@ actual val repositoryModule = module {
 }
 
 actual val apiModule = module {
-    single { provideHttpClient() }
-    single { ApiService(get(),"https://8edc-82-117-207-248.ngrok-free.app","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY1ZGMwYmM2NWRlMjQ2ZDY1MGJhMTFkIiwiZW1haWwiOiJ0ZXN0MTIzNEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InRlc3QxMjM0In0sImlhdCI6MTcxNzUwNDg3OSwiZXhwIjoxNzE3OTM2ODc5fQ.Y0WlYYtMkvLax5h4n7Lvge9m9mNOVT674bzhW-VqEgc") }
+
+    single { provideHttpClient(get()) }
+    single { ApiService(get(),"https://edc5-82-117-207-248.ngrok-free.app") }
 }
 actual val dataStoreModule = module {
     single<Settings> {

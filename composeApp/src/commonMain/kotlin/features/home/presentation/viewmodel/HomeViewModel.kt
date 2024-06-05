@@ -6,8 +6,9 @@ import core.ui.ViewEvent
 import core.ui.ViewSideEffect
 import core.ui.ViewState
 import core.utils.datastore.DataStoreRepository
-import features.home.domain.entities.DeviceEntity
+import features.home.domain.entities.Device
 import features.home.domain.usecase.AddDeviceUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -21,8 +22,8 @@ class HomeViewModel(
             is HomeEvent.DismissAddDeviceDialog -> setSideEffect { HomeSideEffect.DismissAddDeviceDialog }
         }
     }
-    private fun addDevice(device: DeviceEntity) {
-        viewModelScope.launch {
+    private fun addDevice(device: Device) {
+        viewModelScope.launch() {
             setState { HomeState.Loading }
             try {
                 addDeviceUseCase(device)
@@ -38,7 +39,7 @@ class HomeViewModel(
 }
 
 sealed class HomeEvent : ViewEvent {
-    data class AddDevice(val device: DeviceEntity) : HomeEvent()
+    data class AddDevice(val device: Device) : HomeEvent()
     data object ShowAddDeviceDialog : HomeEvent()
     data object DismissAddDeviceDialog : HomeEvent()
 }
