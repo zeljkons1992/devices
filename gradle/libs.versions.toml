@@ -13,8 +13,19 @@ androidx-test-junit = "1.1.5"
 compose-plugin = "1.6.10"
 junit = "4.13.2"
 kotlin = "2.0.0"
+voyagerVersion = "1.0.0"
+koin = "3.6.0-alpha3"
+koinCompose = "3.6.0-alpha3"
+koinComposeMultiplatform = "1.2.0-alpha3"
+ktor = "2.3.11"
+kamel-version = "0.9.0"
+appcompat = "1.7.0"
+activityKtx = "1.7.1"
 
-lifecycleViewModel = "2.8.1"
+lifecycleViewModel = "2.8.0-rc01"
+lifecycleViewmodelAndroid = "2.8.1"
+russh-wolf-version = "0.7.6"
+data-store-version = "1.1.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -27,7 +38,27 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 androidx-material = { group = "com.google.android.material", name = "material", version.ref = "androidx-material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+navigator = {module = "cafe.adriel.voyager:voyager-navigator",version.ref = "voyagerVersion"}
+navigator-tabs = {module = "cafe.adriel.voyager:voyager-tab-navigator",version.ref = "voyagerVersion"}
+navigator-transitions = {module = "cafe.adriel.voyager:voyager-transitions",version.ref = "voyagerVersion"}
+voyager-screenModel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyagerVersion" }
 
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinComposeMultiplatform" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-cio= {module ="io.ktor:ktor-client-cio", version.ref = "ktor"}
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+ktor-client-logging = {module="io.ktor:ktor-client-logging",version.ref="ktor"}
+ktor-serialization = {module = "io.ktor:ktor-serialization-kotlinx-json", version.ref="ktor"}
+ktor-client-serialization = {module="io.ktor:ktor-client-serialization",version.ref="ktor"}
+ktor-client-content-negotiation = {module = "io.ktor:ktor-client-content-negotiation", version.ref= "ktor"}
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+kamel = {module ="media.kamel:kamel-image", version.ref = "kamel-version"}
+russh-wolf = {module="com.russhwolf:multiplatform-settings", version.ref = "russh-wolf-version"}
+data-store = {module= "androidx.datastore:datastore-preferences-core", version.ref = "data-store-version"}
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewModel"}
 
 [plugins]
@@ -36,3 +67,4 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinSerilazable = {id ="org.jetbrains.kotlin.plugin.serialization",version.ref="kotlin"}

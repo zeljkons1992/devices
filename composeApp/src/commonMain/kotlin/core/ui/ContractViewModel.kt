@@ -9,9 +9,17 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-interface ViewEvent
-interface ViewState
-interface ViewSideEffect
+interface ViewEvent {
+
+}
+
+interface ViewState {
+
+}
+
+interface ViewSideEffect {
+
+}
 
 abstract class ContractViewModel<UiState : ViewState, Event : ViewEvent, SideEffect : ViewSideEffect>(
     initialState: UiState

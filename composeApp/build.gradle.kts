@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlinSerilazable)
 }
 
 kotlin {
@@ -33,6 +34,11 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.ktor.client.android)
+            implementation(libs.ktor.client.okhttp)
+            implementation(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
+
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -43,6 +49,24 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.lifecycle.viewmodel)
+
+            implementation(libs.navigator)
+            implementation(libs.navigator.tabs)
+            implementation(libs.navigator.transitions)
+            api(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.cio)
+            implementation(libs.ktor.serialization)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.client.serialization)
+            implementation(libs.kamel)
+            implementation(libs.russh.wolf)
+            implementation(libs.data.store)
+            implementation("network.chaintech:cmp-preference:1.0.0")
+
+
         }
     }
 }
@@ -83,4 +107,8 @@ android {
         debugImplementation(compose.uiTooling)
     }
 }
+
+
+
+
 
