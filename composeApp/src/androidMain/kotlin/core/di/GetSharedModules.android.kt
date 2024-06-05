@@ -1,5 +1,4 @@
 import android.content.Context
-import android.content.SharedPreferences
 import com.russhwolf.settings.AndroidSettings
 import com.russhwolf.settings.Settings
 import core.network.ApiService
@@ -18,12 +17,10 @@ import features.home.domain.usecase.AddDeviceUseCase
 import features.home.presentation.viewmodel.HomeViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.compose.koinInject
-import org.koin.core.module.Module
 import org.koin.dsl.module
 
 actual val viewModelModule = module {
-    viewModel { AuthViewModel(get(), get(), get() ) }
+    viewModel { AuthViewModel(get(), get(), get()) }
     viewModel { HomeViewModel(get()) }
 }
 
@@ -41,11 +38,12 @@ actual val repositoryModule = module {
 actual val apiModule = module {
 
     single { provideHttpClient(get()) }
-    single { ApiService(get(),"https://edc5-82-117-207-248.ngrok-free.app") }
+    single { ApiService(get(), "https://edc5-82-117-207-248.ngrok-free.app") }
 }
 actual val dataStoreModule = module {
     single<Settings> {
-        val sharedPreferences = androidContext().getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val sharedPreferences =
+            androidContext().getSharedPreferences("settings", Context.MODE_PRIVATE)
         AndroidSettings(sharedPreferences)
     }
     single<DataStoreRepository> { BaseDataStoreRepository(get()) }

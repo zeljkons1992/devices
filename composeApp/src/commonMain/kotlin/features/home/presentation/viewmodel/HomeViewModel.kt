@@ -5,10 +5,8 @@ import core.ui.ContractViewModel
 import core.ui.ViewEvent
 import core.ui.ViewSideEffect
 import core.ui.ViewState
-import core.utils.datastore.DataStoreRepository
 import features.home.domain.entities.Device
 import features.home.domain.usecase.AddDeviceUseCase
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel(

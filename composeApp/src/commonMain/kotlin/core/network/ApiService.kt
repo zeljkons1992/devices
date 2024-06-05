@@ -3,7 +3,6 @@ package core.network
 import features.auth.data.models.User
 import features.home.data.models.DeviceDTO
 import io.ktor.client.HttpClient
-import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
