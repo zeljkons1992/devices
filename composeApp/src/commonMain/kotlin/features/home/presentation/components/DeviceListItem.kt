@@ -4,6 +4,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,11 +27,19 @@ fun DeviceListItem(device: Device) {
         Row(
             modifier = Modifier.padding(16.dp)
         ) {
-            device.image?.let {
-                val bitmap = it.toImageBitmap()
+            if (device.image != null) {
+                val bitmap = device.image.toImageBitmap()
                 Image(
                     bitmap = bitmap,
                     contentDescription = "Device Image",
+                    modifier = Modifier
+                        .size(64.dp)
+                        .clip(CircleShape)
+                )
+            } else {
+                Image(
+                    imageVector = Icons.Default.Warning,
+                    contentDescription = "Placeholder Image",
                     modifier = Modifier
                         .size(64.dp)
                         .clip(CircleShape)
