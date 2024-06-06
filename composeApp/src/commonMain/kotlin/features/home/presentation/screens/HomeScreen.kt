@@ -1,17 +1,20 @@
 package features.home.presentation.screens
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.ui.Alignment
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.SnackbarHost
+import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -20,8 +23,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -45,6 +48,7 @@ class HomeScreen : Screen {
         val state by viewModel.uiState.collectAsState()
         val scope = rememberCoroutineScope()
         var showDialog by remember { mutableStateOf(false) }
+        val snackbarHostState = remember { SnackbarHostState() }
 
         LaunchedEffect(Unit) {
             scope.launch {
@@ -57,7 +61,7 @@ class HomeScreen : Screen {
                             showDialog = false
                         }
                         is HomeSideEffect.ShowMessage -> {
-                            // Show message logic here (e.g., Snackbar)
+                            snackbarHostState.showSnackbar(sideEffect.message)
                         }
                     }
                 }
@@ -103,6 +107,11 @@ class HomeScreen : Screen {
                 }
                 else -> { /* No additional UI for other states */ }
             }
+
+            SnackbarHost(
+                hostState = snackbarHostState,
+                modifier = Modifier.align(Alignment.BottomCenter)
+            )
         }
 
         if (showDialog) {

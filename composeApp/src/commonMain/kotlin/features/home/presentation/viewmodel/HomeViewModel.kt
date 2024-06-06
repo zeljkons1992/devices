@@ -27,10 +27,10 @@ class HomeViewModel(
                 addDeviceUseCase(device)
                 setState { HomeState.Idle }
                 setSideEffect { HomeSideEffect.DismissAddDeviceDialog }
-                setSideEffect { HomeSideEffect.ShowMessage("Device added successfully") }
+                setSideEffect { HomeSideEffect.ShowMessage("Device added successfully.") }
             } catch (e: Exception) {
                 setState { HomeState.Error(e.message) }
-                setSideEffect { HomeSideEffect.ShowMessage("Failed to add device") }
+                setSideEffect { HomeSideEffect.ShowMessage("Failed to add device.") }
             }
         }
     }

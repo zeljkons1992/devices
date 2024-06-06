@@ -66,7 +66,8 @@ kotlin {
             implementation(libs.data.store)
             implementation("network.chaintech:cmp-preference:1.0.0")
 
-
+            implementation(libs.peekaboo.ui)
+            implementation(libs.peekaboo.image.picker)
         }
     }
 }

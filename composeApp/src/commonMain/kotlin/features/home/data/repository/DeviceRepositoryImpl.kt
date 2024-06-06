@@ -1,23 +1,24 @@
 package features.home.data.repository
 
 import core.network.ApiService
-import features.home.data.models.toDataModel
+import core.utils.imageConverter.ImageStorage
+import features.home.data.mappers.toDeviceDTO
 import features.home.domain.entities.Device
 import features.home.domain.repository.DeviceRepository
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import kotlinx.serialization.Serializable
 
-class DeviceRepositoryImpl(private val apiClient: ApiService) :
+class DeviceRepositoryImpl(private val apiClient: ApiService, private val imageStorage: ImageStorage) :
     DeviceRepository {
     override suspend fun addDevice(device: Device) {
-        val response: HttpResponse = apiClient.addDevice(device.toDataModel())
-        println("evoooooo")
-        println(response.status)
-        println(response.body<Any?>().toString())
+
+        val response: HttpResponse = apiClient.addDevice(device.toDeviceDTO(imageStorage))
+
         return when (response.status.value) {
             200 -> {
 
+                Unit
             }
             400, 409 -> {
                 val errorResponse: ErrorResponse = response.body()
