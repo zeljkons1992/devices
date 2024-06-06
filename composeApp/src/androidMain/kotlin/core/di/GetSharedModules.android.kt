@@ -6,6 +6,7 @@ import core.network.provideHttpClient
 import core.utils.datastore.BaseDataStoreRepository
 import core.utils.datastore.DataStoreRepository
 import core.utils.datastore.DataStoreViewModel
+import core.utils.imageConverter.ImageStorage
 import features.auth.data.repository.AuthRepositoryImpl
 import features.auth.domain.repository.AuthRepository
 import features.auth.domain.usecase.LoginUserUseCase
@@ -31,14 +32,15 @@ actual val useCaseModule = module {
 }
 
 actual val repositoryModule = module {
+    single<ImageStorage> {ImageStorage(androidContext())}
     single<AuthRepository> { AuthRepositoryImpl(get()) }
-    single<DeviceRepository> { DeviceRepositoryImpl(get()) }
+    single<DeviceRepository> { DeviceRepositoryImpl(get(), get()) }
 }
 
 actual val apiModule = module {
 
     single { provideHttpClient(get()) }
-    single { ApiService(get(), "https://edc5-82-117-207-248.ngrok-free.app") }
+    single { ApiService(get(), "https://7f79-82-117-207-248.ngrok-free.app") }
 }
 actual val dataStoreModule = module {
     single<Settings> {

@@ -26,6 +26,7 @@ lifecycleViewModel = "2.8.0-rc01"
 lifecycleViewmodelAndroid = "2.8.1"
 russh-wolf-version = "0.7.6"
 data-store-version = "1.1.1"
+peekaboo = "0.5.2"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -58,6 +59,9 @@ kamel = {module ="media.kamel:kamel-image", version.ref = "kamel-version"}
 russh-wolf = {module="com.russhwolf:multiplatform-settings", version.ref = "russh-wolf-version"}
 data-store = {module= "androidx.datastore:datastore-preferences-core", version.ref = "data-store-version"}
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewModel"}
+peekaboo-ui = { module = "io.github.onseok:peekaboo-ui", version.ref = "peekaboo" }
+peekaboo-image-picker = { module = "io.github.onseok:peekaboo-image-picker", version.ref = "peekaboo" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
