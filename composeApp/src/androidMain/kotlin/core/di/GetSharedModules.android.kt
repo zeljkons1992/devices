@@ -15,7 +15,9 @@ import features.auth.presentation.mvi.viewmodel.AuthViewModel
 import features.home.data.repository.DeviceRepositoryImpl
 import features.home.domain.repository.DeviceRepository
 import features.home.domain.usecase.AddDeviceUseCase
+import features.home.domain.usecase.GetRemoteDevicesUseCase
 import features.home.presentation.viewmodel.HomeViewModel
+import features.home.presentation.viewmodel.RemoteDevicesViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -23,12 +25,14 @@ import org.koin.dsl.module
 actual val viewModelModule = module {
     viewModel { AuthViewModel(get(), get(), get()) }
     viewModel { HomeViewModel(get()) }
+    viewModel { RemoteDevicesViewModel(get()) }
 }
 
 actual val useCaseModule = module {
     factory { RegisterUserUseCase(get()) }
     factory { LoginUserUseCase(get()) }
     factory { AddDeviceUseCase(get()) }
+    factory { GetRemoteDevicesUseCase(get()) }
 }
 
 actual val repositoryModule = module {

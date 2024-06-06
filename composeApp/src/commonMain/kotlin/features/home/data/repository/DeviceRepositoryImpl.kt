@@ -2,7 +2,9 @@ package features.home.data.repository
 
 import core.network.ApiService
 import core.utils.imageConverter.ImageStorage
+import features.home.data.mappers.toDevice
 import features.home.data.mappers.toDeviceDTO
+import features.home.data.models.DeviceDTO
 import features.home.domain.entities.Device
 import features.home.domain.repository.DeviceRepository
 import io.ktor.client.call.body
@@ -25,10 +27,24 @@ class DeviceRepositoryImpl(private val apiClient: ApiService, private val imageS
                 throw DeviceException(errorResponse.msg)
             }
             else -> {
-                throw DeviceException("Registration failed with status code: ${response.status.value}")
+                throw DeviceException("Adding devices failed with status code: ${response.status.value}")
             }
         }
     }
+
+    override suspend fun getRemoteDevices(): List<Device> {
+        val response : HttpResponse = apiClient.getDevices()
+            return when (response.status.value) {
+                200 -> {
+                    val deviceList : MutableList<Device> = mutableListOf()
+                    response.body<List<DeviceDTO>>().forEach { deviceDTO -> deviceList.add(deviceDTO.toDevice(imageStorage))  }
+                    deviceList
+                }
+                else -> {
+                    throw DeviceException("Get all devices failed with status code: ${response.status.value}")
+                }
+            }
+        }
 }
 
 @Serializable
