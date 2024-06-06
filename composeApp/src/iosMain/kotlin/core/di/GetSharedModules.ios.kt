@@ -7,7 +7,6 @@ import features.auth.presentation.mvi.viewmodel.AuthViewModel
 import features.home.data.repository.DeviceRepositoryImpl
 import features.home.domain.repository.DeviceRepository
 import features.home.domain.usecase.AddDeviceUseCase
-import features.home.presentation.viewmodel.HomeViewModel
 import org.koin.dsl.module
 
 actual val viewModelModule = module {
