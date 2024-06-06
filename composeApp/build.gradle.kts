@@ -108,6 +108,10 @@ android {
         debugImplementation(compose.uiTooling)
     }
 }
+dependencies {
+    implementation(libs.androidx.material)
+    implementation(libs.androidx.ui.android)
+}
 
 
 

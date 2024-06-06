@@ -27,6 +27,7 @@ lifecycleViewmodelAndroid = "2.8.1"
 russh-wolf-version = "0.7.6"
 data-store-version = "1.1.1"
 peekaboo = "0.5.2"
+uiAndroid = "1.6.7"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -61,6 +62,7 @@ data-store = {module= "androidx.datastore:datastore-preferences-core", version.r
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewModel"}
 peekaboo-ui = { module = "io.github.onseok:peekaboo-ui", version.ref = "peekaboo" }
 peekaboo-image-picker = { module = "io.github.onseok:peekaboo-image-picker", version.ref = "peekaboo" }
+androidx-ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroid" }
 
 
 [plugins]
