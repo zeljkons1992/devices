@@ -15,6 +15,8 @@ import features.auth.presentation.mvi.viewmodel.AuthViewModel
 import features.home.data.repository.DeviceRepositoryImpl
 import features.home.domain.repository.DeviceRepository
 import features.home.domain.usecase.AddDeviceUseCase
+import features.home.domain.usecase.DeleteDeviceUseCase
+import features.home.domain.usecase.EditDeviceUseCase
 import features.home.domain.usecase.GetRemoteDevicesUseCase
 import features.home.presentation.viewmodel.RemoteDevicesViewModel
 import org.koin.android.ext.koin.androidContext
@@ -23,7 +25,7 @@ import org.koin.dsl.module
 
 actual val viewModelModule = module {
     viewModel { AuthViewModel(get(), get(), get()) }
-    viewModel { RemoteDevicesViewModel(get(), get()) }
+    viewModel { RemoteDevicesViewModel(get(), get(), get(), get()) }
 }
 
 actual val useCaseModule = module {
@@ -31,6 +33,8 @@ actual val useCaseModule = module {
     factory { LoginUserUseCase(get()) }
     factory { AddDeviceUseCase(get()) }
     factory { GetRemoteDevicesUseCase(get()) }
+    factory { EditDeviceUseCase(get()) }
+    factory { DeleteDeviceUseCase(get()) }
 }
 
 actual val repositoryModule = module {
@@ -42,7 +46,7 @@ actual val repositoryModule = module {
 actual val apiModule = module {
 
     single { provideHttpClient(get()) }
-    single { ApiService(get(), "https://7f79-82-117-207-248.ngrok-free.app") }
+    single { ApiService(get(), "https://834e-82-117-207-248.ngrok-free.app") }
 }
 actual val dataStoreModule = module {
     single<Settings> {

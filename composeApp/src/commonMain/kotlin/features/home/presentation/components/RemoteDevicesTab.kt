@@ -1,6 +1,8 @@
 package features.home.presentation.components
 
+import DeleteConfirmationDialog
 import DeviceListItem
+import EditDeviceDialog
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -46,29 +48,45 @@ object RemoteDevicesTab : Tab {
     override fun Content() {
         val viewModel: RemoteDevicesViewModel = koinInject()
         val state by viewModel.uiState.collectAsState()
+        val sideEffect = viewModel.sideEffect.collectAsState(initial = null).value
         val scope = rememberCoroutineScope()
-        var showDialog by remember { mutableStateOf(false) }
+        var showAddDialog by remember { mutableStateOf(false) }
+        var showDeleteDialog by remember { mutableStateOf(false) }
+        var showEditDialog by remember { mutableStateOf(false) }
         val snackbarHostState = remember { SnackbarHostState() }
+        var deviceToEdit by remember { mutableStateOf<Device?>(null) }
+        var deviceToDelete by remember { mutableStateOf<Device?>(null) }
 
 
-        LaunchedEffect(Unit) {
-            scope.launch {
-                viewModel.sideEffect.collect { sideEffect ->
+        LaunchedEffect(sideEffect) {
+
                     when (sideEffect) {
                         is RemoteDevicesSideEffect.ShowAddDeviceDialog -> {
-                            showDialog = true
+                            showAddDialog = true
                         }
 
                         is RemoteDevicesSideEffect.DismissAddDeviceDialog -> {
-                            showDialog = false
+                            showAddDialog = false
                         }
 
                         is RemoteDevicesSideEffect.ShowMessage -> {
                             snackbarHostState.showSnackbar(sideEffect.message)
                         }
+
+                        is RemoteDevicesSideEffect.DismissDeleteDeviceDialog -> showDeleteDialog = false
+                        is RemoteDevicesSideEffect.DismissEditDeviceDialog -> showEditDialog = false
+                        is RemoteDevicesSideEffect.ShowDeleteDeviceDialog -> {
+                            deviceToDelete = sideEffect.device
+                            showDeleteDialog = true
+                        }
+                        is RemoteDevicesSideEffect.ShowEditDeviceDialog -> {
+                            deviceToEdit = sideEffect.device
+                            showEditDialog = true
+                        }
+
+                        else -> {}
                     }
-                }
-            }
+
         }
         Box(
             modifier = Modifier.fillMaxSize()
@@ -82,7 +100,7 @@ object RemoteDevicesTab : Tab {
                         modifier = Modifier.fillMaxSize()
                     ) {
                         items(devices) { device ->
-                            DeviceListItem(device)
+                            DeviceListItem(device, onEdit = { viewModel.onEvent(RemoteDevicesEvent.ShowEditDeviceDialog(device)) }, onDelete = { viewModel.onEvent(RemoteDevicesEvent.DeleteDevice(device)) })
                         }
                     }
                 }
@@ -103,7 +121,7 @@ object RemoteDevicesTab : Tab {
                 hostState = snackbarHostState,
                 modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 76.dp)
             )
-            if (showDialog) {
+            if (showAddDialog) {
                 AddDeviceDialog(
                     onDismiss = { viewModel.onEvent(RemoteDevicesEvent.DismissAddDeviceDialog) },
                     onSubmit = { device ->
@@ -111,6 +129,28 @@ object RemoteDevicesTab : Tab {
                         viewModel.onEvent(RemoteDevicesEvent.DismissAddDeviceDialog)
                     }
                 )
+            }
+
+            if (showEditDialog) {
+                deviceToEdit?.let {
+                    EditDeviceDialog(
+                        device = it,
+                        onSubmit = { updatedDevice ->
+                            viewModel.onEvent(RemoteDevicesEvent.EditDevice(updatedDevice))
+                        },
+                        onDismiss = { viewModel.onEvent(RemoteDevicesEvent.DismissEditDeviceDialog) }
+                    )
+                }
+            }
+
+            if (showDeleteDialog) {
+                deviceToDelete?.let {
+                    DeleteConfirmationDialog(
+                        device = it,
+                        onConfirm = { viewModel.onEvent(RemoteDevicesEvent.ConfirmDeleteDevice(it)) },
+                        onDismiss = { viewModel.onEvent(RemoteDevicesEvent.DismissDeleteDeviceDialog) }
+                    )
+                }
             }
         }
     }

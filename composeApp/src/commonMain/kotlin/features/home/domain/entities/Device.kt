@@ -2,7 +2,7 @@ package features.home.domain.entities
 
 
 data class Device(
-    val id: String,
+    var id: String,
     val name: String,
     val status: String,
     val category: String,
