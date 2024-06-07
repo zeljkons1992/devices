@@ -13,9 +13,10 @@ import kotlinx.serialization.Serializable
 
 class DeviceRepositoryImpl(private val apiClient: ApiService, private val imageStorage: ImageStorage) :
     DeviceRepository {
+        private lateinit var response: HttpResponse
     override suspend fun addDevice(device: Device) {
 
-        val response: HttpResponse = apiClient.addDevice(device.toDeviceDTO(imageStorage))
+        response = apiClient.addDevice(device.toDeviceDTO(imageStorage))
 
         return when (response.status.value) {
             200 -> {
@@ -33,7 +34,7 @@ class DeviceRepositoryImpl(private val apiClient: ApiService, private val imageS
     }
 
     override suspend fun getRemoteDevices(): List<Device> {
-        val response : HttpResponse = apiClient.getDevices()
+        response = apiClient.getDevices()
             return when (response.status.value) {
                 200 -> {
                     val deviceList : MutableList<Device> = mutableListOf()
@@ -45,6 +46,26 @@ class DeviceRepositoryImpl(private val apiClient: ApiService, private val imageS
                 }
             }
         }
+
+    override suspend fun editDevice(device: Device) {
+        print(device)
+        response = apiClient.editDevice(device.toDeviceDTO(imageStorage))
+        println("!!!!!!!!!!!")
+        println(response.status)
+        println(response.body<Any?>().toString())
+        if (response.status.value != 200) {
+            val errorResponse: ErrorResponse = response.body()
+            throw DeviceException(errorResponse.msg)
+        }
+    }
+
+    override suspend fun deleteDevice(device: Device) {
+        response = apiClient.deleteDevice(device.toDeviceDTO(imageStorage))
+        if (response.status.value != 200) {
+            val errorResponse: ErrorResponse = response.body()
+            throw DeviceException(errorResponse.msg)
+        }
+    }
 }
 
 @Serializable

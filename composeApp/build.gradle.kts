@@ -111,6 +111,7 @@ android {
 dependencies {
     implementation(libs.androidx.material)
     implementation(libs.androidx.ui.android)
+    implementation(libs.androidx.material3.android)
 }
 
 
